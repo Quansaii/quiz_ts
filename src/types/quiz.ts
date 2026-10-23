@@ -1,9 +1,9 @@
-interface ApiQuestionsResponse{
+export interface ApiQuestionsResponse{
   response_code:number;
   results:ApiQuestion[];
 }
 
-interface ApiQuestion{
+export interface ApiQuestion{
   type:'multiple'|'boolean';
   difficulty: 'easy'|'medium'|'hard';
   category:string;
@@ -12,34 +12,34 @@ interface ApiQuestion{
   incorrect_answers:string[];
 }
 
-interface ApiCategoriesResponse{
+export interface ApiCategoriesResponse{
   trivia_categories: {id:number, name:string}[]
 }
 
-type Difficulty = 'any'|'easy'|'medium'|'hard';
+export type Difficulty = 'any'|'easy'|'medium'|'hard';
 
-type QuestionType = 'any'|'multiple'| 'boolean';
+export type QuestionType = 'any'|'multiple'| 'boolean';
 
-interface Category{
+export interface Category{
   id:number;
   name:string;
 }
 
-interface QuizSettings{
+export interface QuizSettings{
   amount:number,
   categoryId:number | null;
   difficulty:Difficulty;
   type:QuestionType;
 }
 
-interface Answer{
+export interface Answer{
   text:string;
   isCorrect:boolean;
 }
 
-type DifficultyWithoutAny = Exclude<Difficulty, 'any'>
+export type DifficultyWithoutAny = Exclude<Difficulty, 'any'>
 
-interface Question{
+export interface Question{
   id:string;
   category:string;
   difficulty: DifficultyWithoutAny;
@@ -47,14 +47,14 @@ interface Question{
   answers:Answer[];
 }
 
-type GameState = 
+export type GameState = 
   | {status:"setup"; settings:QuizSettings}
   | {status:"loading"; settings:QuizSettings}
   | {status:"error"; settings:QuizSettings; message:string}
   | {status:"question"; settings:QuizSettings; questions:Question[]; index:number; selected:number|null; score:number;}
   | {status:"finished"; settings:QuizSettings; score:number; total:number}
 
-type GameAction =
+export type GameAction =
   | {type: "UPDATE_SETTINGS"; settings:Partial<QuizSettings>}
   | {type: "START"}
   | {type: "LOADED"; questions:Question[]}
