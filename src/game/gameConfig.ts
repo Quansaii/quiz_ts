@@ -1,0 +1,1 @@
+export const timeForAnswer:number = 30 as const;
