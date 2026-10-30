@@ -20,7 +20,7 @@ export function useQuestions(currentStatus:GameState['status'], settings:QuizSet
                     if(err instanceof DOMException && err.name === "AbortError"){
                         return;
                     }
-                    const message = err instanceof TriviaApiError ? err.message : "Не удалось загрузить вопросы!";
+                    const message = err instanceof TriviaApiError ? err.message : "Could not load questions.";
                     dispatch({type:'LOAD_FAILED', message:message})
                 }
             }

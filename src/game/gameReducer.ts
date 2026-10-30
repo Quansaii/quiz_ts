@@ -59,7 +59,7 @@ export function gameReducer(currentState:GameState, action:GameAction):GameState
                     settings:{
                         ...currentState.settings
                     },
-                    message:"Loading Failed!"
+                    message:action.message
                 }
             }
             break;
@@ -86,20 +86,12 @@ export function gameReducer(currentState:GameState, action:GameAction):GameState
             break;
 
         case 'TIMEOUT':
-            if(currentState.status === 'question'){
-                if(currentState.selected !== null){
-                    return{
-                        ...currentState
-                    }
-                }
-                else{
-                    return{
-                        ...currentState,
-                        selected: -1
-                    }
+            if(currentState.status === 'question' && currentState.selected === null){
+                return{
+                    ...currentState,
+                    selected: -1
                 }
             }
-            
             break;
 
         case 'NEXT':
@@ -113,8 +105,11 @@ export function gameReducer(currentState:GameState, action:GameAction):GameState
                 }
                 else{
                     return{
-                        ...currentState,
                         status:'finished',
+                        settings:{
+                            ...currentState.settings
+                        },
+                        score:currentState.score,
                         total:currentState.questions.length
                     }
                 }

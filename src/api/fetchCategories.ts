@@ -11,18 +11,18 @@ export async function fetchCategories(signal?: AbortSignal): Promise<Category[]>
         if (error instanceof DOMException && error.name === 'AbortError') {
             throw error;
         }
-        throw new TriviaApiError('Проблемы с соединением', null);
+        throw new TriviaApiError('Connection problem. Please check your internet connection.', null);
     }
 
     if (!response.ok) {
-        throw new TriviaApiError('Сервер вернул ошибку', response.status);
+        throw new TriviaApiError('The server returned an error.', response.status);
     }
 
     let data: ApiCategoriesResponse;
     try {
         data = await response.json();
     } catch (error) {
-        throw new TriviaApiError('Не удалось прочитать ответ сервера', null);
+        throw new TriviaApiError('Could not read the server response.', null);
     }
 
     const results: Category[] = data.trivia_categories.map((result) => {

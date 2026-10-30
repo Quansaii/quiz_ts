@@ -30,7 +30,7 @@ export function useCategories():UseCategoriesResult{
                             return;
                         }
                     }
-                    setError('Не удалось загрузить категории!');
+                    setError('Could not load categories.');
                     setLoading(false);
                 }
             };

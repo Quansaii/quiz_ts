@@ -10,6 +10,8 @@ if (!container) {
 
 createRoot(container).render(
   <StrictMode>
-    <App />
+    <main className="app">
+      <App />
+    </main>
   </StrictMode>,
 );
